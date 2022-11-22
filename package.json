@@ -1,0 +1,33 @@
+{
+	"name": "rafaelsms-site",
+	"version": "0.0.1",
+	"description": "Bootstrap app for rafaelsms.com.",
+	"main": "src/app.js",
+	"private": true,
+	"scripts": {
+		"build": "webpack",
+		"serve": "webpack serve"
+	},
+	"author": "Rafael S. M. Santos <eu@rafaelsms.com>",
+	"license": "UNLICENSED",
+	"devDependencies": {
+		"autoprefixer": "",
+		"css-loader": "",
+		"exports-loader": "",
+		"expose-loader": "",
+		"file-loader": "",
+		"node-sass": "",
+		"postcss": "",
+		"postcss-loader": "",
+		"precss": "",
+		"sass-loader": "",
+		"style-loader": "",
+		"webpack": "",
+		"webpack-cli": "",
+		"webpack-dev-server": ""
+	},
+	"dependencies": {
+		"bootstrap": "",
+		"popper.js": ""
+	}
+}
