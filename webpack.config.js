@@ -1,15 +1,20 @@
 const path = require('path');
 
 module.exports = {
-	entry: {
-		bundle: './frontend/app.js',
-	},
-	mode: 'production',
-	//mode: 'development',
 	target: "web",
+	entry: './src/app.js',
+	mode: 'development', // 'production' used in `npm run build`
+	devServer: {
+		static: {
+			directory: path.join(__dirname, 'static'),
+			publicPath: '/'
+		}
+	},
 	output: {
-		filename: '[name].js',
-		path: path.resolve(__dirname, 'static')
+		filename: 'bundle.js',
+		path: path.resolve(__dirname, 'dist'),
+		publicPath: '/dist/',
+		clean: true
 	},
 	module: {
 		rules: [
@@ -18,5 +23,5 @@ module.exports = {
 				use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"]
 			}
 		]
-	},
+	}
 };

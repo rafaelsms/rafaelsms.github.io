@@ -1,0 +1,12 @@
+/*
+ * https://getbootstrap.com/docs/5.3/customize/sass/
+ */
+
+
+/* Custom fonts */
+$font-size-base: 1.1rem;
+$font-family-base: 'Ubuntu Mono', monospace;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Bootstrap */
+@import "bootstrap/scss/bootstrap";
