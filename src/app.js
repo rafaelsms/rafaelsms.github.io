@@ -1,8 +1,5 @@
 // Base SCSS
-import('./app.scss');
+import(/* webpackMode: 'eager' */ './app.scss');
 
 // Bootstrap's color toggler
-import('./color-toggler');
-
-// Bootstrap's whole JS
-//import 'bootstrap';
+import(/* webpackMode: 'eager' */ './color-toggler');
