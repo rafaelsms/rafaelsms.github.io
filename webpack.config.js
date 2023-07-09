@@ -1,5 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
+// 'terser-webpack-plugin' is already included in webpack
+// https://webpack.js.org/plugins/terser-webpack-plugin/#getting-started
 const TerserPlugin = require('terser-webpack-plugin');
 
 const glob = require('glob');
@@ -12,13 +14,21 @@ const PATHS = {
 module.exports = {
 	target: 'web',
 	entry: './src/app.js',
-	// mode: 'production', // 'production' already used in `npm run build`
+	// mode: 'production', // 'production' mode already set in `npm run build`
 	mode: 'development',
 	devServer: {
-		static: {
-			directory: path.join(__dirname, 'static'),
-			publicPath: '/'
-		}
+		static: [
+			// To serve favicon at '/static/'
+			{
+				directory: path.join(__dirname, 'static'),
+				publicPath: '/static/'
+			},
+			// To serve index.html at root
+			{
+				directory: path.join(__dirname, 'static'),
+				publicPath: '/'
+			}
+		]
 	},
 	output: {
 		filename: 'bundle.js',

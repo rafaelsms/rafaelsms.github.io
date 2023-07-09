@@ -10,23 +10,17 @@
 	"author": "Rafael Sartori M. Santos <eu@rafaelsms.com>",
 	"license": "UNLICENSED",
 	"devDependencies": {
-		"autoprefixer": "",
 		"css-loader": "",
-		"exports-loader": "",
-		"expose-loader": "",
 		"file-loader": "",
-		"mini-css-extract-plugin": "^2.7.3",
-		"precss": "",
-		"purgecss-webpack-plugin": "^5.0.0",
-		"sass": "",
+		"mini-css-extract-plugin": "",
+		"purgecss-webpack-plugin": "",
 		"sass-loader": "",
-		"style-loader": "",
 		"webpack": "",
 		"webpack-cli": "",
 		"webpack-dev-server": ""
 	},
 	"dependencies": {
-		"bootstrap": "^5.3.0-alpha1",
-		"popper.js": ""
+		"@popperjs/core": "",
+		"bootstrap": "^5.3"
 	}
 }
