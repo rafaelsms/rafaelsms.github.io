@@ -1,25 +1,18 @@
-# `rafaelsms.com`
+# [`rafaelsms.com`](https://rafaelsms.com/)
 
-Personal website with my CV and a brief description of my interests.
+Personal website with my resumé and a brief description of my interests. Built using [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
 
 ## Dependencies, building, running
 
 Requires [Node.js](https://nodejs.org/en). Feel free to use `yarn` or `npm` as package manager.
 
-To install using `npm`:
-```
-$ npm install
-```
+All commands are run from the root of the project, from a terminal:
 
-[Webpack](https://webpack.js.org) is used to serve for development and build for release. Some plugins are used to further minimize the size of the package, filtering only necessary CSS classes used in the index page. [Bootstrap](https://getbootstrap.com)'s Javascript components are not needed for this simple page, so they're not included in `/src/app.js`.
-
-To serve for development:
-```
-$ npm run serve
-```
-The development server has `/src/app.js` as an entrypoint, serving files in `/static/` as well. Also, `/index.html` is an [soft link](https://en.wikipedia.org/wiki/Symbolic_link) to `/static/index.html`.
-
-To build for release:
-```
-$ npm run build
-```
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |

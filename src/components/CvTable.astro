@@ -1,0 +1,22 @@
+---
+interface CvEntry {
+	title: string;
+	content: string;
+	description?: string;
+}
+
+interface Props {
+	entries: Array<CvEntry>;
+}
+
+const { entries } = Astro.props;
+---
+<div class="grid grid-cols-1 sm:grid-cols-4 mb-4 text-wrap">
+	{entries.map(cvEntry =>
+		<div class="col-span-1 p-1 font-mono font-bold hyphens-auto sm:mb-4" set:html={cvEntry.title}/>
+		<div class="col-span-3 mb-4">
+			<div class="p-1" set:html={cvEntry.content}/>
+			<div class="p-1 text-sm text-stone-600 dark:text-slate-400" set:html={cvEntry.description}/>
+		</div>
+	)}
+</div>

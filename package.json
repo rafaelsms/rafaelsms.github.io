@@ -1,26 +1,19 @@
 {
-	"name": "rafaelsms-site",
-	"version": "0.0.1",
-	"description": "Bootstrap app for rafaelsms.com.",
-	"private": true,
-	"scripts": {
-		"build": "webpack --mode production",
-		"serve": "webpack serve"
-	},
-	"author": "Rafael Sartori M. Santos <eu@rafaelsms.com>",
-	"license": "UNLICENSED",
-	"devDependencies": {
-		"css-loader": "",
-		"file-loader": "",
-		"mini-css-extract-plugin": "",
-		"purgecss-webpack-plugin": "",
-		"sass-loader": "",
-		"webpack": "",
-		"webpack-cli": "",
-		"webpack-dev-server": ""
-	},
-	"dependencies": {
-		"@popperjs/core": "",
-		"bootstrap": "^5.3"
-	}
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.4.1",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.3.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  }
 }
