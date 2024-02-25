@@ -7,6 +7,9 @@ dist/
 # dependencies
 node_modules/
 
+# Assets downloaded from S3
+s3_assets/
+
 # logs
 *.log*
 

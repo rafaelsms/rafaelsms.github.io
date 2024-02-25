@@ -1,7 +1,12 @@
 ---
+import { Image, Picture } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
+import PictureLoader from '@components/PictureLoader.astro';
+import dinho from '@assets/external/pages/photos/dinho.jpg';
 ---
 <Layout title="Photography">
-	<p class="font-mono text-lime-600 dark:text-lime-400">// TODO actually implement the page</p>
+	<div class="max-w-prose p-3">
+		<PictureLoader image={dinho} />
+	</div>
 </Layout>
 

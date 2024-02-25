@@ -1,0 +1,27 @@
+---
+import { getImage, Picture } from 'astro:assets';
+
+interface Props {
+	image: ImageMetadata;
+}
+
+const { image } = Astro.props;
+
+// A very small low quality image to be shown while the response image is loading
+const backgroundImage = await getImage({
+	src: image,
+	format: "webp",
+	width: 64,
+	quality: 1
+});
+---
+{/*
+reference:
+* desktops: 3840x2160 2560x1440 1920x1080
+* mobile: 3120x1440 2340x1080
+27 inches 150 dpi gives 4k
+8 inches 300 dpi gives 2k
+*/}
+<div style={`background-image: url('${backgroundImage.src}');`} class="bg-cover bg-origin-center bg-no-repeat bg-clip-padding rounded-lg shadow-lg overflow-hidden">
+	<Picture src={image} formats={['webp']} fallbackFormat="jpg" quality=77 widths={[240, 540, 1480, image.width]} sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 1480px, ${image.width}px`} alt="Dinho" class="object-center object-cover" />
+</div>

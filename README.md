@@ -2,6 +2,8 @@
 
 Personal website with my resumé and a brief description of my interests. Built using [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
 
+It uses S3 for photos and other large assets to avoid large objects in the repository. They are downloaded and optimized during build.
+
 ## Dependencies, building, running
 
 Requires [Node.js](https://nodejs.org/en). Feel free to use `yarn` or `npm` as package manager.
