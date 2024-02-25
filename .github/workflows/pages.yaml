@@ -31,7 +31,7 @@ jobs:
         env:
           RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
         with:
-          args: copy rafaelsms-assets: s3_assets/
+          args: 'copy rafaelsms-assets: s3_assets/'
 
       - name: Install node dependencies
         run: npm ci
