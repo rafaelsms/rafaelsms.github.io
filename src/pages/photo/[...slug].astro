@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import OptimizedPhoto from '@components/OptimizedPhoto.astro';
+import Shadow from '@components/Shadow.astro';
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -15,8 +16,11 @@ export async function getStaticPaths() {
 const { photo } = Astro.props;
 ---
 <Layout title={photo.data.title}>
+	{/* TODO: add back button? */}
 	<h1 class="font-mono font-bold text-3xl text-center p-3">{photo.data.title}</h1>
 	<div class="max-w-prose">
-		<OptimizedPhoto image={photo.data.image} alt={photo.data.description} />
+		<Shadow>
+			<OptimizedPhoto image={photo.data.image} alt={photo.data.description} />
+		</Shadow>
 	</div>
 </Layout>
