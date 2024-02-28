@@ -1,0 +1,33 @@
+---
+import { getImage, Picture } from "astro:assets";
+
+interface Props {
+	image: ImageMetadata;
+	alt: string;
+	extraClass?: string;
+}
+
+const { image, alt, extraClass = "" } = Astro.props;
+
+/*
+ * Some reference:
+ * - desktops: 3840x2160 2560x1440 1920x1080
+ * - mobile: 3120x1440 2340x1080
+ * - 27 inches 150 dpi gives 4k
+ * - 8 inches 300 dpi gives 2k
+ */
+const widths = [240, 540, 720, 1280, 1920, 2560, image.width];
+const sizes = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1280px) 720px, (max-width: 1600px) 1280px, (max-width: 2340px) 1920px, (max-width: 3120px) 2560px, ${image.width}px`;
+
+// A very small low quality image to be shown while the response image is loading
+const backgroundImage = await getImage({
+	src: image,
+	format: "webp",
+	width: 64,
+	quality: 1,
+});
+---
+
+<div style={`background-image: url('${backgroundImage.src}');`} class={`bg-cover bg-center bg-origin-center bg-no-repeat bg-clip-padding rounded-md shadow-md shadow-neutral-500/30 dark:shadow-neutral-900/30 hover:shadow-lg hover:shadow-neutral-500/30 dark:hover:shadow-neutral-900/50 transition-shadow duration-200 overflow-hidden max-w-fit max-h-fit ${extraClass}`}>
+	<Picture src={image} formats={["webp"]} fallbackFormat="jpg" quality="77" widths={widths} sizes={sizes} alt={alt} title={alt} class={`object-center object-cover ${extraClass}`} />
+</div>

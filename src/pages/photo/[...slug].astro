@@ -1,0 +1,22 @@
+---
+import Layout from '@layouts/Layout.astro';
+import OptimizedPhoto from '@components/OptimizedPhoto.astro';
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+	const photos = await getCollection("photos");
+
+	return photos.map(photo => ({
+		params: { slug: photo.id },
+		props: { photo },
+	}));
+};
+
+const { photo } = Astro.props;
+---
+<Layout title={photo.data.title}>
+	<h1 class="font-mono font-bold text-3xl text-center p-3">{photo.data.title}</h1>
+	<div class="max-w-prose">
+		<OptimizedPhoto image={photo.data.image} alt={photo.data.description} />
+	</div>
+</Layout>

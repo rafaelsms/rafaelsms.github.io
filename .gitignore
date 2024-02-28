@@ -7,11 +7,18 @@ dist/
 # dependencies
 node_modules/
 
-# Assets downloaded from S3
-s3_assets/
+# VSCode settings
+.vscode/
 
-# logs
+# Assets and content downloaded from S3
+/src/assets/*
+!/src/assets/.gitkeep
+/src/content/*
+!/src/content/config.ts
+
+# logs, shell scripts
 *.log*
+*.sh
 
 # environment variables
 .env

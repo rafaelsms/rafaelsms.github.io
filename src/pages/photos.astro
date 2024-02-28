@@ -1,12 +1,33 @@
 ---
-import { Image, Picture } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
-import PictureLoader from '@components/PictureLoader.astro';
-import dinho from '@assets/external/pages/photos/dinho.jpg';
+import OptimizedPhoto from '@components/OptimizedPhoto.astro';
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+const photos = await getCollection("photos");
+const categories = await getCollection("photo_categories");
+
+const categoriesById = new Map<string, CollectionEntry<'photo_categories'>>();
+const photosByCategoryId = new Map<string, Array<CollectionEntry<'photos'>>>();
+
+categories.forEach(async category => {
+	categoriesById.set(category.id, category);
+	photosByCategoryId.set(category.id, photos.filter(photo => photo.data.category.id === category.id));
+});
+
 ---
 <Layout title="Photography">
-	<div class="max-w-prose p-3">
-		<PictureLoader image={dinho} />
+	<div class="flex flex-wrap content-center justify-center mb-6">
+		{categories.map((category) =>
+			<a class="basis-1/3 p-4" href={`/photo-category/${category.id}/`}>
+				<div class="relative group">
+					<OptimizedPhoto image={category.data.coverImage} alt={category.data.imageDescription} extraClass="aspect-square dark:brightness-95" />
+					<div class="absolute inset-y-2/3 w-full pointer-events-none">
+						<h1 class="font-mono font-bold text-3xl text-center group-hover:underline backdrop-blur text-slate-50 group-hover:text-white dark:text-slate-100 bg-gray-600/30 p-3">{category.data.title}</h1>
+					</div>
+				</div>
+			</a>
+		)}
 	</div>
 </Layout>
 

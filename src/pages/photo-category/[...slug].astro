@@ -1,0 +1,45 @@
+---
+import Layout from '@layouts/Layout.astro';
+import OptimizedPhoto from '@components/OptimizedPhoto.astro';
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+	const photoCategories = await getCollection("photo_categories");
+
+	return photoCategories.map(category => ({
+		params: { slug: category.id },
+		props: { category },
+	}));
+};
+
+const { category } = Astro.props;
+
+const photos = (await getCollection("photos"))
+	.filter(photo => photo.data.category.id === category.id)
+	.map(photo => {
+		const image = photo.data.image;
+		const verticalRatio = Math.round(image.height / image.width);
+		return {
+			image: image,
+			description: photo.data.description,
+			href: `/photo/${photo.id}`,
+			classes: {
+				'place-self-center': true,
+				'row-span-2': (verticalRatio >= 2),
+				'row-span-1': (verticalRatio <= 1)
+			},
+		};
+	});
+---
+<Layout title={category.data.title}>
+	<h1 class="font-mono font-bold text-3xl text-center p-3">{category.data.title}</h1>
+	<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 grid-flow-row-dense gap-4">
+		{photos.map(photo =>
+			<div class:list={photo.classes}>
+				<a href={photo.href}>
+					<OptimizedPhoto image={photo.image} alt={photo.description} />
+				</a>
+			</div>
+		)}
+	</div>
+</Layout>

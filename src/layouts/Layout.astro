@@ -20,8 +20,8 @@ const links = [
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!--
 			Favicon provided by favicon.io and twemoji:
 			https://favicon.io/emoji-favicons/cat
@@ -42,7 +42,9 @@ const links = [
 				</a>
 			</div>
 			<div class="flex flex-wrap justify-center align-center gap-y-2 gap-x-5">
-				{links.map(link => <a href={link.href} class="hover:underline text-stone-600 dark:text-slate-300">{link.title}</a>)}
+				{links.map(link =>
+					<a href={link.href} class="hover:underline text-stone-600 dark:text-slate-300">{link.title}</a>
+				)}
 			</div>
 		</div>
 		<main class="container p-3 mx-auto">

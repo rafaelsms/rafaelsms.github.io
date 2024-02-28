@@ -26,12 +26,19 @@ jobs:
         with:
           node-version: 20
 
-      - name: Installs and rclone assets
+      - name: rclone assets
         uses: wei/rclone@v1
         env:
           RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
         with:
-          args: 'copy rafaelsms-assets: s3_assets/'
+          args: 'copy rafaelsms-assets:assets/ src/assets/'
+
+      - name: rclone content
+        uses: wei/rclone@v1
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+        with:
+          args: 'copy rafaelsms-assets:content/ src/content/'
 
       - name: Install node dependencies
         run: npm ci
