@@ -27,7 +27,45 @@ const backgroundImage = await getImage({
 	quality: 1,
 });
 ---
-
-<div style={`background-image: url('${backgroundImage.src}');`} class={`bg-cover bg-center bg-origin-center bg-no-repeat bg-clip-padding max-w-fit max-h-fit ${extraClass}`}>
+<div style={`background-image: url('${backgroundImage.src}');`} class={`bg-cover bg-center bg-origin-center bg-no-repeat bg-clip-padding max-w-fit max-h-fit blur-load ${extraClass}`}>
 	<Picture src={image} formats={["webp"]} fallbackFormat="jpg" quality="77" widths={widths} sizes={sizes} alt={alt} title={alt} class={`object-center object-cover ${extraClass}`} />
 </div>
+
+{/* Reference: https://blog.webdevsimplified.com/2023-05/lazy-load-images/ */}
+<style>
+	.blur-load {
+		filter: blur(10px);
+	}
+
+	.blur-load.blur-loaded {
+		filter: none;
+		transition: filter 220ms ease 140ms;
+	}
+
+	.blur-load img {
+		opacity: 0;
+		transition: opacity 160ms linear;
+	}
+
+	.blur-load.blur-loaded img {
+		opacity: 1;
+	}
+</style>
+
+<script>
+	const wrappers = document.querySelectorAll(".blur-load")
+	wrappers.forEach(imageWrapper => {
+		const image = imageWrapper.querySelector("img");
+		if (image) {
+			const loadedListener = () => {
+				imageWrapper.classList.add("blur-loaded");
+			};
+
+			if (image?.complete) {
+				loadedListener();
+			} else {
+				image.addEventListener("load", loadedListener);
+			}
+		}
+	});
+</script>
