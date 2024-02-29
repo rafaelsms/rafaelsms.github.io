@@ -15,9 +15,8 @@ export async function getStaticPaths() {
 
 const { photo } = Astro.props;
 ---
-<Layout title={photo.data.title}>
+<Layout title={photo.data.pageTitle}>
 	{/* TODO: add back button? */}
-	<h1 class="font-mono font-bold text-3xl text-center p-3">{photo.data.title}</h1>
 	<Shadow>
 		<OptimizedPhoto image={photo.data.image} alt={photo.data.description} extraClass="w-auto h-screen" />
 	</Shadow>

@@ -12,7 +12,7 @@ const photoCategories = defineCollection({
 const photos = defineCollection({
 	type: 'data',
 	schema: ({ image }) => z.object({
-		title: z.string(),
+		pageTitle: z.string(),
 		description: z.string(),
 		category: reference('photo_categories'),
 		image: image()
