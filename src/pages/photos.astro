@@ -25,7 +25,7 @@ categories.forEach(async category => {
 					<div class="relative group">
 						<OptimizedPhoto image={category.data.coverImage} alt={category.data.imageDescription} extraClass="aspect-square dark:brightness-95" />
 						<div class="absolute inset-y-1/2 w-full pointer-events-none">
-							<div class="backdrop-blur text-slate-50 group-hover:text-white dark:text-slate-100 bg-gray-600/30 p-3">
+							<div class="backdrop-blur-lg text-slate-50 group-hover:text-white dark:text-slate-100 bg-black/15 p-3">
 								<h1 class="line-clamp-2 text-ellipsis font-mono font-bold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center group-hover:underline">{category.data.title}</h1>
 							</div>
 						</div>
