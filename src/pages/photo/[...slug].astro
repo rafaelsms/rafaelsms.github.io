@@ -18,9 +18,7 @@ const { photo } = Astro.props;
 <Layout title={photo.data.title}>
 	{/* TODO: add back button? */}
 	<h1 class="font-mono font-bold text-3xl text-center p-3">{photo.data.title}</h1>
-	<div class="max-w-prose">
-		<Shadow>
-			<OptimizedPhoto image={photo.data.image} alt={photo.data.description} />
-		</Shadow>
-	</div>
+	<Shadow>
+		<OptimizedPhoto image={photo.data.image} alt={photo.data.description} extraClass="w-auto h-screen" />
+	</Shadow>
 </Layout>
