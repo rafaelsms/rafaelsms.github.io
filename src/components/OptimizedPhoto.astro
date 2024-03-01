@@ -56,20 +56,10 @@ const backgroundImage = await getImage({
 	const wrappers = document.querySelectorAll(".blur-load");
 	wrappers.forEach(imageWrapper => {
 		const image = imageWrapper.querySelector("img");
-		if (image) {
-			const loadedListener = () => {
-				imageWrapper.classList.add("blur-loaded");
-			};
-
-			if (image.complete) {
-				loadedListener();
-			} else {
-				image.addEventListener("load", loadedListener);
-			}
-		}
-	});
-	console.log('Executed .blur-load');
-	document.addEventListener("astro:after-preparation", () => {
-		console.log('astro:after-preparation');
+		// Execute on load event even if already completed, so the low resolution background image doesn't appear without the blur
+		// TODO: this doesn't happen at the reference, investigate why
+		image?.addEventListener("load", () => {
+			imageWrapper.classList.add("blur-loaded");
+		});
 	});
 </script>
