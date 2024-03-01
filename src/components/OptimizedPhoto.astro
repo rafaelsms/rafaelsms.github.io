@@ -33,21 +33,25 @@ const backgroundImage = await getImage({
 
 {/* Reference: https://blog.webdevsimplified.com/2023-05/lazy-load-images/ */}
 <style>
-	.blur-load {
+	.blur-load.blur-loading {
 		filter: blur(10px);
-	}
-
-	.blur-load.blur-loaded {
-		filter: none;
 		transition: filter 220ms ease 140ms;
 	}
 
-	.blur-load img {
+	.blur-load:not(.blur-loading) {
+		background-image: none !important;
+	}
+
+	.blur-load.blur-loading.blur-loaded {
+		filter: none;
+	}
+
+	.blur-load.blur-loading img {
 		opacity: 0;
 		transition: opacity 160ms linear;
 	}
 
-	.blur-load.blur-loaded img {
+	.blur-load.blur-loading.blur-loaded img {
 		opacity: 1;
 	}
 </style>
@@ -56,10 +60,17 @@ const backgroundImage = await getImage({
 	const wrappers = document.querySelectorAll(".blur-load");
 	wrappers.forEach(imageWrapper => {
 		const image = imageWrapper.querySelector("img");
-		// Execute on load event even if already completed, so the low resolution background image doesn't appear without the blur
-		// TODO: this doesn't happen at the reference, investigate why
-		image?.addEventListener("load", () => {
-			imageWrapper.classList.add("blur-loaded");
-		});
+		if (image) {
+			const loadedListener = () => {
+				imageWrapper.classList.add("blur-loaded");
+			};
+
+			if (image.complete) {
+				loadedListener();
+			} else {
+				imageWrapper.classList.add("blur-loading");
+				image.addEventListener("load", loadedListener);
+			}
+		}
 	});
 </script>
