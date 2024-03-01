@@ -31,12 +31,25 @@ const photos = (await getCollection("photos"))
 			},
 		};
 	});
+
+const gridClasses = [
+	"grid grid-flow-row-dense gap-6",
+	{
+		// Base grid of 1 if one or less photos
+		"grid-cols-1": photos.length <= 1,
+		// Base grid of 2 if at least 2 photos
+		"grid-cols-2": photos.length >= 2,
+		// Large screen grids also require more photos to take effect
+		"lg:grid-cols-3": photos.length >= 3,
+		"2xl:grid-cols-4": photos.length >= 4
+	}
+];
 ---
 <Layout title={category.data.title}>
 	{/* TODO: add back button? */}
 	<h1 class="font-mono font-bold text-3xl text-center p-3">{category.data.title}</h1>
 	{/* TODO: improve this page if low amount of photos? */}
-	<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 grid-flow-row-dense gap-4">
+	<div class:list={gridClasses}>
 		{photos.map(photo =>
 			<div class:list={photo.classes}>
 				<Shadow>

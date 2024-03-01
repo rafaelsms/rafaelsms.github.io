@@ -23,54 +23,10 @@ const sizes = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1
 const backgroundImage = await getImage({
 	src: image,
 	format: "webp",
-	width: 64,
-	quality: 1,
+	width: 24,
+	quality: 80,
 });
 ---
-<div style={`background-image: url('${backgroundImage.src}');`} class={`bg-cover bg-center bg-origin-center bg-no-repeat bg-clip-padding max-w-fit max-h-fit blur-load ${extraClass}`}>
+<div style={`background-image: url('${backgroundImage.src}');`} class={`bg-cover bg-center bg-origin-center bg-no-repeat bg-clip-padding max-w-fit max-h-fit bg-gray-100 dark:bg-gray-700 ${extraClass}`}>
 	<Picture src={image} formats={["webp"]} fallbackFormat="jpg" quality="77" widths={widths} sizes={sizes} alt={alt} title={alt} class={`object-center object-cover ${extraClass}`} />
 </div>
-
-{/* Reference: https://blog.webdevsimplified.com/2023-05/lazy-load-images/ */}
-<style>
-	.blur-load.blur-loading {
-		filter: blur(10px);
-		transition: filter 220ms ease 140ms;
-	}
-
-	.blur-load:not(.blur-loading) {
-		background-image: none !important;
-	}
-
-	.blur-load.blur-loading.blur-loaded {
-		filter: none;
-	}
-
-	.blur-load.blur-loading img {
-		opacity: 0;
-		transition: opacity 160ms linear;
-	}
-
-	.blur-load.blur-loading.blur-loaded img {
-		opacity: 1;
-	}
-</style>
-
-<script>
-	const wrappers = document.querySelectorAll(".blur-load");
-	wrappers.forEach(imageWrapper => {
-		const image = imageWrapper.querySelector("img");
-		if (image) {
-			const loadedListener = () => {
-				imageWrapper.classList.add("blur-loaded");
-			};
-
-			if (image.complete) {
-				loadedListener();
-			} else {
-				imageWrapper.classList.add("blur-loading");
-				image.addEventListener("load", loadedListener);
-			}
-		}
-	});
-</script>
