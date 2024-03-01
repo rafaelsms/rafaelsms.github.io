@@ -53,7 +53,7 @@ const backgroundImage = await getImage({
 </style>
 
 <script>
-	const wrappers = document.querySelectorAll(".blur-load")
+	const wrappers = document.querySelectorAll(".blur-load");
 	wrappers.forEach(imageWrapper => {
 		const image = imageWrapper.querySelector("img");
 		if (image) {
@@ -61,11 +61,15 @@ const backgroundImage = await getImage({
 				imageWrapper.classList.add("blur-loaded");
 			};
 
-			if (image?.complete) {
+			if (image.complete) {
 				loadedListener();
 			} else {
 				image.addEventListener("load", loadedListener);
 			}
 		}
+	});
+	console.log('Executed .blur-load');
+	document.addEventListener("astro:after-preparation", () => {
+		console.log('astro:after-preparation');
 	});
 </script>
