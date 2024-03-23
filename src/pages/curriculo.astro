@@ -1,0 +1,88 @@
+---
+import Layout from "@layouts/Layout.astro";
+import CvTable from "@components/CvTable.astro";
+
+const experienceEntries = [
+	{
+		title: "ago/2022 - hoje",
+		content:
+			"<strong>Software Analyst Trainee</strong> em <strong>Instituto de Pesquisa Eldorado</strong>",
+		description:
+			"Desenvolvimento de ferramentas servidas em uma aplicação web usando Google Cloud Platform. O back-end é feito com Java usando Spring, Hibernate, Google Cloud SDK. O front-end é feito principalmente em AngularJS e Angular.",
+	},
+	{
+		title: "nov/2021 - jul/2022",
+		content:
+			"<strong>Software Developer Intern</strong> em <strong>Motorola Mobility</strong>",
+		description:
+			"Desenvolvimento de ferramentas servidas em uma aplicação web usando Google Cloud Platform. O back-end é feito com Java usando Spring, Hibernate, Google Cloud SDK. O front-end é feito principalmente em AngularJS e Angular.",
+	},
+	{
+		title: "set/2020 - jan/2021<br>" + "jul/2018 - dez/2018",
+		content: "<strong>Monitor</strong> na <strong>Unicamp</strong>",
+		description:
+			"Ajudei estudantes a aprender sobre estruturas de dados e algoritmos, usando C e Python.",
+	},
+	{
+		title: "2017 - nov/2021",
+		content: "<strong>Desenvolvedor web autônomo</strong>",
+		description:
+			"Desenvolvi e mantive alguns sites que foram desenvolvidos em Python usando a framework Django e simples front-end usando Bootstrap.",
+	},
+	{
+		title: "2012 - 2015",
+		content:
+			"<strong>Desenvolvedor e administrador</strong> de um <strong>servidor de Minecraft</strong> de sucesso",
+		description:
+			"Desenvolvi várias modificações ao jogo para melhorar jogabilidade e entreter jogadores. Com o pico de mais de 500 jogadores online simultaneamente, todas as interações com o banco de dados precisaram ser asíncronas ou possuírem latência muito baixa (na escala de centenas de nanosegundos), já que o processamento de todas as ações dos jogadores e não-jogadores não deve ultrapassar 1/20 de segundo.",
+	},
+];
+
+const educationEntries = [
+	{
+		title: "2023 - hoje",
+		content:
+			"Graduação em <strong>Data Science</strong> na <strong>Univesp</strong>",
+	},
+	{
+		title: "2017 - 2022",
+		content:
+			"Graduação em <strong>Engenharia da Computação</strong> na <strong>Unicamp</strong>",
+		description:
+			'Completei 217 de 240 <a href="https://en.wikipedia.org/wiki/Universities_and_higher_education_in_Brazil#:~:text=There%20is%20no%20unified%20academic,to%2050%2D80%20US%20credits." target="_blank" class="hover:underline text-blue-500 dark:text-blue-400 visited:text-purple-600 dark:visited:text-purple-400">créditos</a>.',
+	},
+	{
+		title: "2012 - 2014",
+		content: "Ensino médio completo em <strong>Colégio Anglo Araraquara</strong>",
+	},
+];
+
+const languageSkillEntries = [
+	{
+		title: "Tecnologias e linguagens de programação",
+		content:
+			"Java, C, Python, Javascript<br>" +
+			"Google Cloud, AWS, GNU/Linux, git, Gradle",
+	},
+	{
+		title: "Línguas",
+		content:
+			"Português brasileiro (língua materna), Inglês (certificado FCE &mdash; B2 First)",
+	},
+	{
+		title: "Hobbies",
+		content: "Photography, movies and series, a little bit of gaming",
+	},
+];
+---
+
+<Layout title="Resumé">
+	<h1 class="font-mono font-bold text-3xl mb-3">Experiências 🧑‍💻</h1>
+	<CvTable entries={experienceEntries} />
+
+	<h1 class="font-mono font-bold text-3xl mb-3">Formação 📚</h1>
+	<CvTable entries={educationEntries} />
+
+	<h1 class="font-mono font-bold text-3xl">Línguas e habilidades 💪</h1>
+	<CvTable entries={languageSkillEntries} />
+</Layout>
