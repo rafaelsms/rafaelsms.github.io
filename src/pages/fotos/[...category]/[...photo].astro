@@ -8,14 +8,17 @@ export async function getStaticPaths() {
 	const photos = await getCollection("photos");
 
 	return photos.map(photo => ({
-		params: { slug: photo.id },
+		params: {
+			category: photo.data.category.id,
+			photo: photo.id
+		},
 		props: { photo },
 	}));
 };
 
 const { photo } = Astro.props;
 ---
-<Layout title={photo.data.pageTitle}>
+<Layout title={photo.data.pageTitle} extraClasses={"p-6"}>
 	{/* TODO: add back button? */}
 	<Shadow>
 		<OptimizedPhoto image={photo.data.image} alt={photo.data.description} />

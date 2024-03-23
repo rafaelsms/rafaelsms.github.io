@@ -4,20 +4,28 @@ import { getImage, Picture } from "astro:assets";
 interface Props {
 	image: ImageMetadata;
 	alt: string;
+	sizes?: string;
 	extraClass?: string;
 }
 
-const { image, alt, extraClass = "" } = Astro.props;
+const { image, alt, sizes = "100vw", extraClass = "" } = Astro.props;
 
 /*
+ * "sizes" is a bit difficult to set up properly with different layouts.
+ *
+ * The image will be full screen width on:
+ * - smaller screens on the category page
+ * - all screens on the photo details page
+ *
  * Some reference:
- * - desktops: 3840x2160 2560x1440 1920x1080
- * - mobile: 3120x1440 2340x1080
+ * - container sizes: 100%, 640px, 768px, 1024px, 1280px, 1536px
+ * - desktops: 3840x2160 2560x1440 1920x1080 (DPR is 1.0 or 2.0)
+ * - mobile: 3120x1440 2340x1080 (DPR 2.0 or 3.0?)
  * - 27 inches 150 dpi gives 4k
  * - 8 inches 300 dpi gives 2k
  */
-const widths = [240, 540, 720, 1280, 1920, 2560, image.width];
-const sizes = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1280px) 720px, (max-width: 1600px) 1280px, (max-width: 2340px) 1920px, (max-width: 3120px) 2560px, ${image.width}px`;
+
+const widths = [350, 480, 560, 720, 860, 1400, 1700, 2560, (1536 * 2)];
 
 // A very small low quality image to be shown while the response image is loading
 const backgroundImage = await getImage({

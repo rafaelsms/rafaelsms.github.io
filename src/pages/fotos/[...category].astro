@@ -3,12 +3,13 @@ import Layout from '@layouts/Layout.astro';
 import Shadow from '@components/Shadow.astro';
 import OptimizedPhoto from '@components/OptimizedPhoto.astro';
 import { getCollection } from "astro:content";
+import { imageConfig } from 'astro:assets';
 
 export async function getStaticPaths() {
 	const photoCategories = await getCollection("photo_categories");
 
 	return photoCategories.map(category => ({
-		params: { slug: category.id },
+		params: { category: category.id },
 		props: { category },
 	}));
 };
@@ -23,12 +24,14 @@ const photos = (await getCollection("photos"))
 		return {
 			image: image,
 			description: photo.data.description,
-			href: `/photo/${photo.id}`,
-			classes: {
-				'place-self-center': true,
-				'row-span-2': (verticalRatio >= 2),
-				'row-span-1': (verticalRatio <= 1)
-			},
+			href: `/fotos/${category.id}/${photo.id}`,
+			classes: [
+				['place-self-center'],
+				{
+					'row-span-2': (verticalRatio >= 2),
+					'row-span-1': (verticalRatio <= 1)
+				}
+			],
 		};
 	});
 
@@ -38,23 +41,45 @@ const gridClasses = [
 		// Base grid of 1 if one or less photos
 		"grid-cols-1": photos.length <= 1,
 		// Base grid of 2 if at least 2 photos
-		"grid-cols-2": photos.length >= 2,
+		"md:grid-cols-2": photos.length >= 2,
 		// Large screen grids also require more photos to take effect
 		"lg:grid-cols-3": photos.length >= 3,
 		"2xl:grid-cols-4": photos.length >= 4
 	}
 ];
+
+// Calculate maximum image size
+var imageBreakpoints = [];
+var afterLastBreakpoint = "100vw";
+// Up to "md" (768px), we are using one column
+if (photos.length >= 2) {
+	imageBreakpoints.push("(max-width: 768px) 100vw");
+	afterLastBreakpoint = "50vw";
+}
+// Up to "lg" (1024px), we are using two columns
+if (photos.length >= 3) {
+	imageBreakpoints.push("(max-width: 1024px) 50vw");
+	afterLastBreakpoint = "33vw";
+}
+// Up to "2xl" (1536px), we are using three columns
+if (photos.length >= 4) {
+	imageBreakpoints.push("(max-width: 1536px) 33vw");
+	afterLastBreakpoint = "25vw";
+}
+imageBreakpoints.push(afterLastBreakpoint);
+const imageSizes = imageBreakpoints.join(", ");
+
 ---
 <Layout title={category.data.title}>
 	{/* TODO: add back button? */}
-	<h1 class="font-mono font-bold text-3xl text-center p-3">{category.data.title}</h1>
+	<h1 class="font-mono font-bold text-3xl truncate text-center p-3">{category.data.title}</h1>
 	{/* TODO: improve this page if low amount of photos? */}
 	<div class:list={gridClasses}>
 		{photos.map(photo =>
 			<div class:list={photo.classes}>
 				<Shadow>
 					<a href={photo.href}>
-						<OptimizedPhoto image={photo.image} alt={photo.description} />
+						<OptimizedPhoto image={photo.image} alt={photo.description} sizes={imageSizes} />
 					</a>
 				</Shadow>
 			</div>

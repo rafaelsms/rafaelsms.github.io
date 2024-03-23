@@ -1,9 +1,10 @@
 ---
 interface Props {
 	title?: string;
+	extraClasses?: any;
 }
 
-const { title } = Astro.props;
+const { title, extraClasses = "container p-3" } = Astro.props;
 
 const links = [
 	{
@@ -47,9 +48,9 @@ const links = [
 				)}
 			</div>
 		</div>
-		<main class="container p-3 mx-auto mb-4">
+		<main class:list={["mx-auto mb-4", extraClasses]}>
 			<div class="flex flex-row justify-center">
-				<div class="size-fit">
+				<div class="size-fit max-w-full">
 					<slot/>
 				</div>
 			</div>
