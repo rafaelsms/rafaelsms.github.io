@@ -3,7 +3,6 @@ import Layout from '@layouts/Layout.astro';
 import Shadow from '@components/Shadow.astro';
 import OptimizedPhoto from '@components/OptimizedPhoto.astro';
 import { getCollection } from "astro:content";
-import { imageConfig } from 'astro:assets';
 
 export async function getStaticPaths() {
 	const photoCategories = await getCollection("photo_categories");
