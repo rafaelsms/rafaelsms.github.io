@@ -16,6 +16,10 @@ categories.forEach(async category => {
 	photosByCategoryId.set(category.id, photos.filter(photo => photo.data.category.id === category.id));
 });
 
+// max-w-md is 28rem (448px), so use that for maximum image size
+// Up to that, though, use smaller verions to fill the screen
+const imageSizes = "(max-width: 448px) 90vw, 28rem";
+
 ---
 <Layout title="Photography">
 	<div class="flex flex-wrap content-center justify-center gap-6">
@@ -23,8 +27,7 @@ categories.forEach(async category => {
 			<a class="max-w-md" href={`/fotos/${category.id}/`}>
 				<Shadow>
 					<div class="relative group">
-						{/* max-w-md is 28rem max, so use that for image size */}
-						<OptimizedPhoto image={category.data.coverImage} alt={category.data.imageDescription} sizes="28rem" extraClass="aspect-square dark:brightness-95" />
+						<OptimizedPhoto image={category.data.coverImage} alt={category.data.imageDescription} sizes={imageSizes} extraClass="aspect-square dark:brightness-95" />
 						<div class="absolute inset-y-1/2 w-full pointer-events-none">
 							<div class="backdrop-blur-lg text-slate-50 group-hover:text-white dark:text-slate-100 bg-black/15 p-3">
 								<h1 class="line-clamp-2 text-ellipsis font-mono font-bold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center group-hover:underline">{category.data.title}</h1>
