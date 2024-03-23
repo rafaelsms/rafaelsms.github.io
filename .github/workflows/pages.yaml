@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           cd dist/_astro/
-          find . -regextype posix-extended -regex '.*\.[A-Za-z0-9]+_[A-Za-z0-9]+\.[A-Za-z0-9]+$' -print | sed -rn 's/^\.\/(.+)_[A-Za-z0-9]+(\.[A-Za-z0-9]+)$/\1\2/p' | sort | uniq | xargs -I {} -n1 bash -c 'echo Testing \"{}\" && test -e {} && echo Deleting source image: \"{}\" && rm {}'
+          find . -regextype posix-extended -regex '.*\.[A-Za-z0-9]+_[A-Za-z0-9]+\.[A-Za-z0-9]+$' -print | sed -rn 's/^\.\/(.+)_[A-Za-z0-9]+(\.[A-Za-z0-9]+)$/\1\2/p' | sort | uniq | xargs -I {} -n1 bash -c 'echo Testing \"{}\" && test -e {} && echo Deleting source image: \"{}\" && rm {}' || true
 
       - name: Setup Pages
         id: pages
