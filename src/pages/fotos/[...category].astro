@@ -17,6 +17,8 @@ const { category } = Astro.props;
 
 const photos = (await getCollection("photos"))
 	.filter(photo => photo.data.category.id === category.id)
+	// Sort in reverse order by rank (higher number goes first)
+	.sort((image1, image2) => image2.data.rank - image1.data.rank)
 	.map(photo => {
 		const image = photo.data.image;
 		const verticalRatio = Math.round(image.height / image.width);
@@ -71,8 +73,8 @@ const imageSizes = imageBreakpoints.join(", ");
 ---
 <Layout title={category.data.title}>
 	{/* TODO: add back button? */}
-	<h1 class="font-mono font-bold text-3xl truncate text-center p-3">{category.data.title}</h1>
 	{/* TODO: improve this page if low amount of photos? */}
+	<h1 class="font-mono font-bold text-3xl truncate text-center p-3">{category.data.title}</h1>
 	<div class:list={gridClasses}>
 		{photos.map(photo =>
 			<div class:list={photo.classes}>

@@ -15,6 +15,7 @@ const photos = defineCollection({
 		pageTitle: z.string(),
 		description: z.string(),
 		category: reference('photo_categories'),
+		rank: z.number(),
 		image: image()
 	})
 });
